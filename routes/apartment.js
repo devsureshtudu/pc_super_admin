@@ -1,54 +1,54 @@
 const express = require('express');
 const { body } = require('express-validator');
 
-const playerController = require('../controllers/player');
+const apartmentController = require('../controllers/apartment');
 const uploadImage = require('../middleware/upload-image');
 
 const router = express.Router();
 
-router.get('/players', playerController.getAllPlayers);
+router.get('/apartments', apartmentController.getAllApartments);
 
-router.get('/player/:playerId', playerController.getSinglePlayer);
+router.get('/apartment/:apartmentId', apartmentController.getSingleApartment);
 
-router.delete('/player/:playerId', playerController.deletePlayer);
+router.delete('/apartment/:apartmentId', apartmentController.deleteApartment);
 
-router.post('/player', uploadImage,
+router.post('/apartment', uploadImage,
     [
         body('name')
             .notEmpty()
-            .withMessage('Please enter player name!'),
+            .withMessage('Please enter apartment name!'),
         body('age')
             .notEmpty()
-            .withMessage("Please enter the player's age")
+            .withMessage("Please enter the apartment's age")
             .isInt()
             .withMessage("Age must be an integer"),
         body('bio')
             .trim()
             .notEmpty()
-            .withMessage("Please enter the player's biography")
+            .withMessage("Please enter the apartment's biography")
             .isLength({ min: 15 })
             .withMessage('The biography must be at least 15 characters'),
     ],
-    playerController.addPlayer
+    apartmentController.addApartment
 );
 
-router.put('/player/:playerId', uploadImage,
+router.put('/apartment/:apartmentId', uploadImage,
     [
         body('name')
             .notEmpty()
-            .withMessage('Please enter player name!'),
+            .withMessage('Please enter apartment name!'),
         body('age')
             .notEmpty()
-            .withMessage("Please enter the player's age")
+            .withMessage("Please enter the apartment's age")
             .isInt()
             .withMessage("Age must be an integer"),
         body('bio')
             .trim()
             .notEmpty()
-            .withMessage("Please enter the player's biography")
+            .withMessage("Please enter the apartment's biography")
             .isLength({ min: 15 })
             .withMessage('The biography must be at least 15 characters'),
     ],
-    playerController.updatePlayer);
+    apartmentController.updateApartment);
 
 module.exports = router;

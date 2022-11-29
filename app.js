@@ -4,7 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 
-const playerRoutes = require('./routes/player');
+const apartmentRoutes = require('./routes/apartment');
 
 const app = express();
 
@@ -18,19 +18,19 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api/v1/', playerRoutes);
+app.use('/api/v1/', apartmentRoutes);
 
 
-mongoose.connect('mongodb://localhost:27017/player-db',
+mongoose.connect('mongodb://amdsubham:Suresh1234@31.220.21.195:27135/admin',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
     .then(() => {
-        console.log('You are connected to player-db!')
+        console.log('You are connected to apartment-db!')
         app.listen(3000);
     })
     .catch((error) => {
-        console.log('Connection to player-db failed', error)
+        console.log('Connection to apartment-db failed', error)
     });
 
